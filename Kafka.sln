@@ -4,7 +4,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		.env.example = .env.example
 		Makefile = Makefile
-		docker-compose.override.yml = docker-compose.override.yml
+		docker-compose.infrastructure.yml = docker-compose.infrastructure.yml
 		.gitignore = .gitignore
 		docker-compose.tools.yml = docker-compose.tools.yml
 	EndProjectSection

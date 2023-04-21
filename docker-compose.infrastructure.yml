@@ -3,7 +3,7 @@ version: "3.9"
 services:
   schema-registry:
     image: confluentinc/cp-schema-registry:5.5.3
-    container_name: tp-crawler-schema-registry
+    container_name: kafka-schema-registry
     ports:
       - "${SCHEMA_REGISTRY_PORT}:8081"
     environment:
@@ -16,11 +16,11 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:5.5.3
-    container_name: tp-crawler-kafka
+    container_name: kafka-kafka
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      # Кафка доступна на порту 9092 внутри Docker-сети и на порту 9093 на localhost-е.
+      # Kafka is available on port 9092 inside the Docker network and on port 9093 on localhost
       KAFKA_ADVERTISED_LISTENERS: CLIENT://kafka:9092,EXTERNAL://localhost:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: CLIENT
@@ -35,6 +35,6 @@ services:
 
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.3
-    container_name: tp-crawler-zookeeper
+    container_name: kafka-zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
