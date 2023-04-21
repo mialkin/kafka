@@ -1,3 +1,4 @@
+using Kafka.Api.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -17,6 +18,8 @@ services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
 
 services.AddRouting(options => options.LowercaseUrls = true);
+
+services.ConfigureKafkaProducers();
 
 var app = builder.Build();
 
