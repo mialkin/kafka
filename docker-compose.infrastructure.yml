@@ -1,19 +1,6 @@
 version: "3.9"
 
 services:
-  schema-registry:
-    image: confluentinc/cp-schema-registry:5.5.3
-    container_name: kafka-schema-registry
-    ports:
-      - "${SCHEMA_REGISTRY_PORT}:8081"
-    environment:
-      SCHEMA_REGISTRY_HOST_NAME: schema-registry
-      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "PLAINTEXT://kafka:9092"
-      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
-    depends_on:
-      - kafka
-      - zookeeper
-
   kafka:
     image: confluentinc/cp-kafka:5.5.3
     container_name: kafka-kafka
@@ -25,7 +12,6 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: CLIENT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_SCHEMA_REGISTRY_URL: "schema-registry:8081"
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     ports:
       - "${KAFKA_PORT}:9092"
