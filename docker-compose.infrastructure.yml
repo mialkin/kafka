@@ -7,15 +7,15 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      # Kafka is available on port 9092 inside the Docker network and on port 7030 on localhost
-      KAFKA_ADVERTISED_LISTENERS: CLIENT://kafka:9092,EXTERNAL://localhost:7030
+      # Kafka is available on port KAFKA_PORT inside the Docker network and on port KAFKA_SSL_PORT on localhost
+      KAFKA_ADVERTISED_LISTENERS: "CLIENT://kafka:${KAFKA_PORT},EXTERNAL://localhost:${KAFKA_SSL_PORT}"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: CLIENT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     ports:
-      - "${KAFKA_PORT}:9092"
-      - "${KAFKA_SSL_PORT}:7030"
+      - "${KAFKA_PORT}:${KAFKA_PORT}"
+      - "${KAFKA_SSL_PORT}:${KAFKA_SSL_PORT}"
     depends_on:
       - zookeeper
 
