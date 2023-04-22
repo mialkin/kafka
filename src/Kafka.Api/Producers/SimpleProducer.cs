@@ -14,7 +14,7 @@ public class SimpleProducer
         _logger = logger;
         _producerConfig = new ProducerConfig
         {
-            BootstrapServers = "localhost:9093",
+            BootstrapServers = "localhost:7030",
             BrokerAddressFamily = BrokerAddressFamily.V4
         };
     }
