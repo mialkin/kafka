@@ -1,8 +1,6 @@
-using System.Threading.Tasks;
 using Confluent.Kafka;
-using Microsoft.Extensions.Logging;
 
-namespace Kafka.Api.Producers;
+namespace Kafka.Confluent.Api.Producers;
 
 public class SimpleProducer
 {

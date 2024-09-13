@@ -1,9 +1,8 @@
-using System.Threading.Tasks;
 using Bogus;
-using Kafka.Api.Producers;
+using Kafka.Confluent.Api.Producers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kafka.Api.Controllers;
+namespace Kafka.Confluent.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]

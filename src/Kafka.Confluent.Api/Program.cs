@@ -1,4 +1,4 @@
-using Kafka.Api.Configuration;
+using Kafka.Confluent.Api.Configuration;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

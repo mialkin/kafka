@@ -1,7 +1,6 @@
-using Kafka.Api.Producers;
-using Microsoft.Extensions.DependencyInjection;
+using Kafka.Confluent.Api.Producers;
 
-namespace Kafka.Api.Configuration;
+namespace Kafka.Confluent.Api.Configuration;
 
 public static class KafkaProducersConfiguration
 {
