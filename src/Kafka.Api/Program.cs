@@ -19,17 +19,17 @@ services.AddRouting(options => options.LowercaseUrls = true);
 
 services.ConfigureKafkaProducers();
 
-var app = builder.Build();
+var application = builder.Build();
 
-app.UseSerilogRequestLogging();
+application.UseSerilogRequestLogging();
 
-app.UseSwagger();
-app.UseSwaggerUI(options =>
+application.UseSwagger();
+application.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     options.RoutePrefix = string.Empty;
 });
 
-app.MapControllers();
+application.MapControllers();
 
-app.Run();
+application.Run();
