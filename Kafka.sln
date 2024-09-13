@@ -8,11 +8,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		.gitignore = .gitignore
 		docker-compose.tools.yml = docker-compose.tools.yml
 		readme.md = readme.md
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44240D0C-F223-42F3-A60B-B11CD3B402B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.Api", "src\Kafka.Api\Kafka.Api.csproj", "{488F2609-F684-4498-811B-6816CB4DECE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Confluent", "Confluent", "{3905FE8C-9489-4760-B860-F0BCA20469BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,7 +23,8 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{488F2609-F684-4498-811B-6816CB4DECE1} = {44240D0C-F223-42F3-A60B-B11CD3B402B0}
+		{3905FE8C-9489-4760-B860-F0BCA20469BC} = {44240D0C-F223-42F3-A60B-B11CD3B402B0}
+		{488F2609-F684-4498-811B-6816CB4DECE1} = {3905FE8C-9489-4760-B860-F0BCA20469BC}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{488F2609-F684-4498-811B-6816CB4DECE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
