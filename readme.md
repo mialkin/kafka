@@ -7,22 +7,21 @@
 
 ## How to run application
 
+First run infrastructure:
+
 ```bash
-make run-api
-make run-grpc-server
+make run-infrastructure
+```
+
+Then run application:
+
+```bash
+make run-confluent
+make run-flow
 ```
 or:
 
 ```bash
-make  watch-api
-make  watch-grpc-server
+make watch-confluent
+make watch-flow
 ```
-
-## How to run tests
-
-```bash
-make test
-```
-
-- Kafka API: <http://localhost:7010>
-- Kafka UI: <http://localhost:7040>
