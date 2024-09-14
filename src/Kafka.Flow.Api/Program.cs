@@ -1,4 +1,4 @@
-using Kafka.Flow.Api.Producer;
+using Kafka.Flow.Api.Producers;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 

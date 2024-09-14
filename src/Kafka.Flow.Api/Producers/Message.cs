@@ -1,4 +1,4 @@
-namespace Kafka.Flow.Api.Producer;
+namespace Kafka.Flow.Api.Producers;
 
 public class Message
 {

@@ -1,6 +1,6 @@
 using KafkaFlow;
 
-namespace Kafka.Flow.Api.Producer;
+namespace Kafka.Flow.Api.Producers;
 
 public class MessageProducer(IMessageProducer<MessageProducer> messageProducer) : IMessageProducer
 {

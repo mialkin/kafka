@@ -1,7 +1,7 @@
 using KafkaFlow;
 using KafkaFlow.Serializer;
 
-namespace Kafka.Flow.Api.Producer;
+namespace Kafka.Flow.Api.Producers;
 
 public static class ProducerConfiguration
 {
