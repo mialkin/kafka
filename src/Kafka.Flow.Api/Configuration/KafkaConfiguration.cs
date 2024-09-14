@@ -1,13 +1,14 @@
+using Kafka.Flow.Api.Producers;
 using KafkaFlow;
 using KafkaFlow.Serializer;
 
-namespace Kafka.Flow.Api.Producers;
+namespace Kafka.Flow.Api.Configuration;
 
-public static class ProducerConfiguration
+public static class KafkaConfiguration
 {
     public static void ConfigureKafka(this IServiceCollection services)
     {
-        services.AddSingleton<IMessageProducer, MessageProducer>();
+        services.AddSingleton<ISampleMessageProducer, SampleMessageProducer>();
         const string topicName = "example-topic";
 
         services.AddKafka(
@@ -17,9 +18,12 @@ public static class ProducerConfiguration
                     cluster => cluster
                         .WithBrokers(["localhost:7030"])
                         .CreateTopicIfNotExists(topicName, numberOfPartitions: 1, replicationFactor: 1)
-                        .AddProducer<MessageProducer>(x =>
-                            x.DefaultTopic(topicName)
-                                .AddMiddlewares(y => y.AddSerializer<JsonCoreSerializer>())
+                        .AddProducer<SampleMessageProducer>(
+                            builder => builder
+                                .DefaultTopic(topicName)
+                                .AddMiddlewares(
+                                    middleware => middleware
+                                        .AddSerializer<JsonCoreSerializer>())
                         )
                 )
         );

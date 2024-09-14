@@ -1,3 +1,4 @@
+using Kafka.Flow.Api.Configuration;
 using Kafka.Flow.Api.Producers;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -20,9 +21,9 @@ var application = builder.Build();
 application.UseSerilogRequestLogging();
 application.MapGet("/", () => "Kafka.Flow.Api");
 
-application.MapGet("/produce", async ([FromServices] IMessageProducer messageProducer, string message) =>
+application.MapGet("/produce", async ([FromServices] ISampleMessageProducer messageProducer, string message) =>
 {
-    await messageProducer.ProduceAsync(new Message { Text = message });
+    await messageProducer.ProduceAsync(new SampleMessage { Text = message });
     return Results.Ok();
 });
 
