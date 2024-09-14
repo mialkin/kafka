@@ -27,4 +27,4 @@ run-flow:
 
 .PHONY: watch-flow
 watch-flow:
-	dotnet watch --project $(CONFLUENT_PROJECT) --no-FLOW_PROJECT-reload
+	dotnet watch --project $(FLOW_PROJECT) --no-hot-reload

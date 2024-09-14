@@ -10,23 +10,16 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.WriteTo.Console();
 });
 
-services.AddControllers();
-services.AddEndpointsApiExplorer();
-services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
-
 services.AddRouting(options => options.LowercaseUrls = true);
 
 var application = builder.Build();
 
 application.UseSerilogRequestLogging();
-
-application.UseSwagger();
-application.UseSwaggerUI(options =>
+application.MapGet("/", () => "Kafka.Flow.Api");
+application.MapGet("/produce", (string message) =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-    options.RoutePrefix = string.Empty;
+    return $"Produced message: \"{message}\"";
 });
 
-application.MapControllers();
 
 application.Run();
