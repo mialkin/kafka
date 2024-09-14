@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   kafka:
     image: confluentinc/cp-kafka:5.5.3

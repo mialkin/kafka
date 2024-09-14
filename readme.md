@@ -7,13 +7,19 @@
 
 ## How to run application
 
-First run infrastructure:
+1\. First run infrastructure:
 
 ```bash
 make run-infrastructure
 ```
 
-Then run application:
+To shut down infrastructure, when not needed anymore, run:
+
+```bash
+make shutdown-infrastructure
+```
+
+2\. Run application:
 
 ```bash
 make run-confluent
