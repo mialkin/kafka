@@ -16,7 +16,7 @@ builder.Host.UseSerilog((context, configuration) =>
 });
 
 services.AddRouting(options => options.LowercaseUrls = true);
-services.ConfigureKafka();
+services.ConfigureKafka(builder.Configuration);
 
 var application = builder.Build();
 
