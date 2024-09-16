@@ -8,10 +8,10 @@ public class HelloMessageHandler(ILogger<HelloMessageHandler> logger) : IMessage
     public Task Handle(IMessageContext context, HelloMessage message)
     {
         logger.LogInformation(
-            "Partition: {Partition} | Offset: {Offset} | Message: {Text}",
+            "Consumed new message: {Message}. Partition: {Partition}. Offset: {Offset}.",
+            message.Text,
             context.ConsumerContext.Partition,
-            context.ConsumerContext.Offset,
-            message.Text);
+            context.ConsumerContext.Offset);
 
         return Task.CompletedTask;
     }
