@@ -1,4 +1,3 @@
-using Confluent.Kafka;
 using Kafka.Flow.Api.Consumers;
 using Kafka.Flow.Api.Producers;
 using KafkaFlow;
@@ -20,7 +19,7 @@ public static class KafkaConfiguration
                 .UseConsoleLog()
                 .AddCluster(
                     cluster => cluster
-                        .WithBrokers(["localhost:7030"])
+                        .WithBrokers(kafkaConfig.Brokers)
                         // .CreateTopicIfNotExists(topicName, numberOfPartitions: 1, replicationFactor: 1)
                         .AddProducer<HelloMessageProducer>(
                             builder => builder
@@ -36,44 +35,10 @@ public static class KafkaConfiguration
                             .WithWorkersCount(1)
                             .AddMiddlewares(middlewares => middlewares
                                 .AddDeserializer<JsonCoreDeserializer>()
-                                .AddTypedHandlers(h => h.AddHandler<HelloMessageHandler>())
+                                .AddTypedHandlers(builder => builder.AddHandler<HelloMessageHandler>())
                             )
                         )
                 )
         );
     }
-}
-
-public record KafkaConfig
-{
-    public required string[] Brokers { get; set; }
-    public List<KafkaConsumerConfig> Consumers { get; set; } = [];
-    public List<KafkaProducerConfig> Producers { get; set; } = [];
-
-    public KafkaConsumerConfig GetConsumerConfig(string name)
-    {
-        return Consumers.FirstOrDefault(x => x.Name == name)
-               ?? throw new InvalidOperationException($"KAFKA: Missing settings for consumer - {name}");
-    }
-
-    public KafkaProducerConfig GetProducerConfig(string name)
-    {
-        return Producers.FirstOrDefault(x => x.Name == name)
-               ?? throw new InvalidOperationException($"KAFKA: Missing settings for producer - {name}");
-    }
-}
-
-public record KafkaConsumerConfig
-{
-    public required string Name { get; set; }
-    public required string TopicName { get; set; }
-    public required ConsumerConfig ConsumerConfig { get; set; }
-}
-
-public record KafkaProducerConfig
-{
-    public required string ProducerName { get; set; }
-    public required string Name { get; set; }
-    public required string Topic { get; set; }
-    public required ProducerConfig ProducerConfig { get; set; }
 }
