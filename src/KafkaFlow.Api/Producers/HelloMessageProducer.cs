@@ -1,7 +1,7 @@
-using Kafka.Flow.Api.Models;
 using KafkaFlow;
+using KafkaFlow.Api.Models;
 
-namespace Kafka.Flow.Api.Producers;
+namespace KafkaFlow.Api.Producers;
 
 public class HelloMessageProducer(IMessageProducer<HelloMessageProducer> messageProducer) : IHelloMessageProducer
 {

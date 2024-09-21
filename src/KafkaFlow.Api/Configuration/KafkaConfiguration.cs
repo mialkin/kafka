@@ -1,9 +1,9 @@
-using Kafka.Flow.Api.Consumers;
-using Kafka.Flow.Api.Producers;
 using KafkaFlow;
+using KafkaFlow.Api.Consumers;
+using KafkaFlow.Api.Producers;
 using KafkaFlow.Serializer;
 
-namespace Kafka.Flow.Api.Configuration;
+namespace KafkaFlow.Api.Configuration;
 
 public static class KafkaConfiguration
 {

@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Confluent", "Confluent", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flow", "Flow", "{C4353E4A-94BB-4D03-889E-A7AE7CF88284}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.Flow.Api", "src\Kafka.Flow.Api\Kafka.Flow.Api.csproj", "{D15563E0-AF96-4DC4-9C29-5EA2CBD051A6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaFlow.Api", "src\KafkaFlow.Api\KafkaFlow.Api.csproj", "{D15563E0-AF96-4DC4-9C29-5EA2CBD051A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

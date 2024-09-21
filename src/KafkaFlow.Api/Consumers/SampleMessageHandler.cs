@@ -1,7 +1,7 @@
-using Kafka.Flow.Api.Models;
 using KafkaFlow;
+using KafkaFlow.Api.Models;
 
-namespace Kafka.Flow.Api.Consumers;
+namespace KafkaFlow.Api.Consumers;
 
 public class HelloMessageHandler(ILogger<HelloMessageHandler> logger) : IMessageHandler<HelloMessage>
 {

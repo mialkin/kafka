@@ -1,4 +1,4 @@
-namespace Kafka.Flow.Api.Configuration;
+namespace KafkaFlow.Api.Configuration;
 
 public record KafkaConfig
 {

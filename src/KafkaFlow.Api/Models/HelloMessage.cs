@@ -1,4 +1,4 @@
-namespace Kafka.Flow.Api.Models;
+namespace KafkaFlow.Api.Models;
 
 public class HelloMessage
 {

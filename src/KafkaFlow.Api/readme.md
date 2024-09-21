@@ -17,7 +17,7 @@ and
 
 ```json
 {
-  "Message-Type":"Kafka.Flow.Api.Models.HelloMessage, Kafka.Flow.Api"
+  "Message-Type":"KafkaFlow.Api.Models.HelloMessage, KafkaFlow.Api"
 }
 ```
 

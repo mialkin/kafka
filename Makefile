@@ -1,5 +1,5 @@
 CONFLUENT_PROJECT := src/Kafka.Confluent.Api
-FLOW_PROJECT := src/Kafka.Flow.Api
+FLOW_PROJECT := src/KafkaFlow.Api
 
 .PHONY: copy-env
 copy-env:

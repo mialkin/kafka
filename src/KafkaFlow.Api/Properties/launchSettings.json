@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "Kafka.Flow.Api": {
+    "KafkaFlow.Api": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:7050",
