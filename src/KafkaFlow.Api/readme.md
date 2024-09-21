@@ -2,22 +2,21 @@
 
 This is a bootstrap project that showcases how to create [↑ KafkaFlow](https://farfetch.github.io/kafkaflow/docs/) consumer and producer.
 
-To produce a `Hello world` message visit this link: <http://localhost:7050/produce?message=Hello%20world.>
+To produce a new ship order task visit this link: <http://localhost:7050/produce?orderNumber=12345>.
 
-To produce message via Kafka UI (http://localhost:7040) enter 
+To produce a task via Kafka UI (http://localhost:7040) enter 
 
 ```json
 {
-  "Text":"Hello world"
+  "OrderNumber":"12345"
 }
 ```
 
-`Hello world` inside `Value` input,
-and 
+inside `Value` input, and 
 
 ```json
 {
-  "Message-Type":"KafkaFlow.Api.Models.HelloMessage, KafkaFlow.Api"
+  "Message-Type":"KafkaFlow.Infrastructure.Models.ShipOrderTask, KafkaFlow.Infrastructure"
 }
 ```
 

@@ -1,7 +1,7 @@
-using KafkaFlow.Api.Configuration;
-using KafkaFlow.Api.Models;
-using KafkaFlow.Api.Producers;
 using KafkaFlow;
+using KafkaFlow.Api.Configurations;
+using KafkaFlow.Infrastructure.Models;
+using KafkaFlow.Infrastructure.Producers;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -16,16 +16,17 @@ builder.Host.UseSerilog((context, configuration) =>
 });
 
 services.AddRouting(options => options.LowercaseUrls = true);
-services.ConfigureKafka(builder.Configuration);
+
+services.ConfigureApplication(builder.Configuration);
 
 var application = builder.Build();
 
 application.UseSerilogRequestLogging();
 application.MapGet("/", () => "KafkaFlow.Api");
 
-application.MapGet("/produce", async ([FromServices] IHelloMessageProducer messageProducer, string message) =>
+application.MapGet("/produce", async ([FromServices] IShipOrderTaskProducer messageProducer, string message) =>
 {
-    await messageProducer.ProduceAsync(new HelloMessage { Text = message });
+    await messageProducer.ProduceAsync(new ShipOrderTask { OrderNumber = message });
     return Results.Ok();
 });
 

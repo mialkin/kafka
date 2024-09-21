@@ -42,7 +42,3 @@ or
 make watch-confluent
 ```
 
-3\. Produce message:
-
-1) Visit <http://localhost:7040> to access Kafka UI
-2) Visit <http://localhost:7050/produce?message=Hello%20world> to produce a `Hello world` message
