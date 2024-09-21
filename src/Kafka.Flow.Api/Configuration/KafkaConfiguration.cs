@@ -20,7 +20,7 @@ public static class KafkaConfiguration
                 .AddCluster(
                     cluster => cluster
                         .WithBrokers(kafkaConfig.Brokers)
-                        // .CreateTopicIfNotExists(topicName, numberOfPartitions: 1, replicationFactor: 1)
+                        .CreateTopicIfNotExists("example-topic", numberOfPartitions: 1, replicationFactor: 1)
                         .AddProducer<HelloMessageProducer>(
                             builder => builder
                                 .DefaultTopic(consumerConfig.TopicName)
