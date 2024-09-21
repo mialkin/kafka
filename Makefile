@@ -7,11 +7,11 @@ copy-env:
 
 .PHONY: run-infrastructure
 run-infrastructure: copy-env
-	docker compose --file compose.infrastructure.yml --file compose.tools.yml up
+	docker compose --file compose.infrastructure.yaml --file compose.tools.yaml up
 
 .PHONY: shutdown-infrastructure
 shutdown-infrastructure:
-	docker compose --file compose.infrastructure.yml --file compose.tools.yml down
+	docker compose --file compose.infrastructure.yaml --file compose.tools.yaml down
 	
 .PHONY: run-confluent
 run-confluent:
