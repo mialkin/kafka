@@ -24,9 +24,9 @@ var application = builder.Build();
 application.UseSerilogRequestLogging();
 application.MapGet("/", () => "KafkaFlow.Api");
 
-application.MapGet("/produce", async ([FromServices] IShipOrderTaskProducer messageProducer, string message) =>
+application.MapGet("/produce", async ([FromServices] IShipOrderTaskProducer messageProducer, string orderNumber) =>
 {
-    await messageProducer.ProduceAsync(new ShipOrderTask { OrderNumber = message });
+    await messageProducer.ProduceAsync(new ShipOrderTask { OrderNumber = orderNumber });
     return Results.Ok();
 });
 
