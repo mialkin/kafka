@@ -4,9 +4,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		.env.example = .env.example
 		Makefile = Makefile
-		docker-compose.infrastructure.yml = docker-compose.infrastructure.yml
+		compose.infrastructure.yml = compose.infrastructure.yml
 		.gitignore = .gitignore
-		docker-compose.tools.yml = docker-compose.tools.yml
+		compose.tools.yml = compose.tools.yml
 		readme.md = readme.md
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
