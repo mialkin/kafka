@@ -1,4 +1,6 @@
 using KafkaFlow.Infrastructure.Consumers;
+using KafkaFlow.Infrastructure.Models;
+using KafkaFlow.Infrastructure.Producers;
 using KafkaFlow.Infrastructure.Settings;
 using KafkaFlow.Serializer;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,17 +19,29 @@ public static class KafkaConfiguration
                 .AddCluster(
                     cluster => cluster
                         .WithBrokers(kafkaSettings.Brokers)
-                        .AddConsumer(consumer => consumer
-                            .WithConsumerConfig(consumerSettings.ConsumerConfig)
-                            .Topic(consumerSettings.Topic)
-                            .WithWorkersCount(consumerSettings.WorkersCount)
-                            .WithBufferSize(consumerSettings.BufferSize)
-                            .AddMiddlewares(middlewares => middlewares
-                                .AddDeserializer<JsonCoreDeserializer>()
-                                .AddTypedHandlers(builder => builder.AddHandler<ShipOrderTaskHandler>())
-                            )
+                        .AddConsumer(
+                            consumer => consumer
+                                .WithConsumerConfig(consumerSettings.ConsumerConfig)
+                                .Topic(consumerSettings.Topic)
+                                .WithWorkersCount(consumerSettings.WorkersCount)
+                                .WithBufferSize(consumerSettings.BufferSize)
+                                .AddMiddlewares(
+                                    middlewares => middlewares
+                                        .AddDeserializer<JsonCoreDeserializer>()
+                                        .AddTypedHandlers(builder => builder.AddHandler<ShipOrderTaskHandler>())
+                                )
                         )
+                        .AddProducer<ShipOrderTask>(
+                            producer =>
+                            {
+                                producer
+                                    .DefaultTopic("ship-order-tasks")
+                                    .WithAcks(Acks.All)
+                                    .AddMiddlewares(middlewares => middlewares.AddSerializer<JsonCoreSerializer>());
+                            })
                 )
         );
+
+        services.AddSingleton<IShipOrderTaskProducer, ShipOrderTaskProducer>();
     }
 }

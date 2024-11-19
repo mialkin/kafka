@@ -2,20 +2,13 @@ using Confluent.Kafka;
 
 namespace Kafka.Confluent.Api.Producers;
 
-public class SimpleProducer
+public class SimpleProducer(ILogger<SimpleProducer> logger)
 {
-    private readonly ILogger<SimpleProducer> _logger;
-    private readonly ProducerConfig _producerConfig;
-
-    public SimpleProducer(ILogger<SimpleProducer> logger)
+    private readonly ProducerConfig _producerConfig = new()
     {
-        _logger = logger;
-        _producerConfig = new ProducerConfig
-        {
-            BootstrapServers = "localhost:7030",
-            BrokerAddressFamily = BrokerAddressFamily.V4
-        };
-    }
+        BootstrapServers = "localhost:7030",
+        BrokerAddressFamily = BrokerAddressFamily.V4
+    };
 
     public async Task ProduceAsync(string message)
     {
@@ -30,13 +23,13 @@ public class SimpleProducer
                 topic: "simple-producer-topic",
                 message: new Message<Null, string> { Value = message });
 
-            _logger.LogInformation(
+            logger.LogInformation(
                 "Delivered {Value} to topic partition offset {TopicPartitionOffset}",
                 deliveryResult.Value, deliveryResult.TopicPartitionOffset);
         }
         catch (ProduceException<Null, string> exception)
         {
-            _logger.LogError(exception, "Unexpected exception occured");
+            logger.LogError(exception, "Unexpected exception occured");
         }
     }
 }
