@@ -43,8 +43,7 @@ public static class KafkaConfiguration
                                     // .WithAcks(Acks.All)
                                     .AddMiddlewares(
                                         middlewares =>
-                                            middlewares.AddSingleTypeSerializer<JsonCoreSerializer>(
-                                                typeof(MessageTypeA)));
+                                            middlewares.AddSingleTypeSerializer<JsonCoreSerializer>(typeof(MessageTypeA)));
                             })
                 )
         );
@@ -52,6 +51,9 @@ public static class KafkaConfiguration
         services.AddSingleton<IShipOrderTaskProducer, ShipOrderTaskProducer>();
     }
 }
+
+// .AddDeserializer<JsonCoreDeserializer, MyMessageTypeResolver>()
+// .AddSerializer<JsonCoreSerializer, MyMessageTypeResolver>()
 
 // class MyMessageTypeResolver : IMessageTypeResolver
 // {
