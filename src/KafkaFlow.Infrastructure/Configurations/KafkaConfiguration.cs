@@ -33,7 +33,7 @@ public static class KafkaConfiguration
                                         .AddTypedHandlers(builder => builder.AddHandler<ShipOrderTaskHandler>())
                                 )
                         )
-                        .AddProducer<ShipOrderTask>(
+                        .AddProducer<ShipOrderTaskResult>(
                             producer =>
                             {
                                 producer
