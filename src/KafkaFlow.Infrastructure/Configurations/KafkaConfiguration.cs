@@ -3,6 +3,7 @@ using KafkaFlow.Infrastructure.Consumers;
 using KafkaFlow.Infrastructure.Models;
 using KafkaFlow.Infrastructure.Producers;
 using KafkaFlow.Infrastructure.Settings;
+using KafkaFlow.Middlewares.Serializer.Resolvers;
 using KafkaFlow.Serializer;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,18 +30,21 @@ public static class KafkaConfiguration
                                 .WithBufferSize(consumerSettings.BufferSize)
                                 .AddMiddlewares(
                                     middlewares => middlewares
-                                        .AddDeserializer<JsonCoreDeserializer>()
-                                        .AddTypedHandlers(builder => builder.AddHandler<ShipOrderTaskHandler>())
+                                        // .AddDeserializer<JsonCoreDeserializer>()
+                                        .AddSingleTypeDeserializer<JsonCoreDeserializer>(typeof(MessageTypeB))
                                 )
                         )
-                        .AddProducer<ShipOrderTaskResult>(
+                        .AddProducer<MessageTypeA>(
                             producer =>
                             {
                                 producer
                                     .WithProducerConfig(producerSettings.Configuration)
                                     .DefaultTopic(producerSettings.Topic)
                                     // .WithAcks(Acks.All)
-                                    .AddMiddlewares(middlewares => middlewares.AddSerializer<JsonCoreSerializer>());
+                                    .AddMiddlewares(
+                                        middlewares =>
+                                            middlewares.AddSingleTypeSerializer<JsonCoreSerializer>(
+                                                typeof(MessageTypeA)));
                             })
                 )
         );
@@ -48,3 +52,9 @@ public static class KafkaConfiguration
         services.AddSingleton<IShipOrderTaskProducer, ShipOrderTaskProducer>();
     }
 }
+
+// class MyMessageTypeResolver : IMessageTypeResolver
+// {
+//     public ValueTask<Type> OnConsumeAsync(IMessageContext context) => new(typeof(MessageTypeB));
+//     public ValueTask OnProduceAsync(IMessageContext context) => default;
+// }

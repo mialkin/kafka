@@ -28,7 +28,7 @@ application.MapGet("/", () => "KafkaFlow.Api");
 application.MapGet(
     "/produce", async ([FromServices] IShipOrderTaskProducer messageProducer, string orderNumber) =>
     {
-        await messageProducer.ProduceAsync(new ShipOrderTaskResult(orderNumber));
+        await messageProducer.ProduceAsync(new MessageTypeA(orderNumber));
         return Results.Ok();
     });
 

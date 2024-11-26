@@ -4,5 +4,5 @@ namespace KafkaFlow.Infrastructure.Producers;
 
 public interface IShipOrderTaskProducer
 {
-    Task ProduceAsync(ShipOrderTaskResult shipOrderTaskResult);
+    Task ProduceAsync(MessageTypeA messageTypeA);
 }
