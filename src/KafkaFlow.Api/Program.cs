@@ -9,11 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
-builder.Host.UseSerilog((context, configuration) =>
-{
-    configuration.ReadFrom.Configuration(context.Configuration);
-    configuration.WriteTo.Console();
-});
+builder.Host.UseSerilog(
+    (context, configuration) =>
+    {
+        configuration.ReadFrom.Configuration(context.Configuration);
+        configuration.WriteTo.Console();
+    });
 
 services.AddRouting(options => options.LowercaseUrls = true);
 
@@ -24,11 +25,12 @@ var application = builder.Build();
 application.UseSerilogRequestLogging();
 application.MapGet("/", () => "KafkaFlow.Api");
 
-application.MapGet("/produce", async ([FromServices] IShipOrderTaskProducer messageProducer, string orderNumber) =>
-{
-    await messageProducer.ProduceAsync(new ShipOrderTask { OrderNumber = orderNumber });
-    return Results.Ok();
-});
+application.MapGet(
+    "/produce", async ([FromServices] IShipOrderTaskProducer messageProducer, string orderNumber) =>
+    {
+        await messageProducer.ProduceAsync(new ShipOrderTaskResult(orderNumber));
+        return Results.Ok();
+    });
 
 var kafkaBus = application.Services.CreateKafkaBus();
 await kafkaBus.StartAsync();

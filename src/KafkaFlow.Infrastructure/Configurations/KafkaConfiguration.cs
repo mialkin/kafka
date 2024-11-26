@@ -1,3 +1,4 @@
+using KafkaFlow.Infrastructure.Constants;
 using KafkaFlow.Infrastructure.Consumers;
 using KafkaFlow.Infrastructure.Models;
 using KafkaFlow.Infrastructure.Producers;
@@ -11,7 +12,8 @@ public static class KafkaConfiguration
 {
     public static void ConfigureKafka(this IServiceCollection services, KafkaSettings kafkaSettings)
     {
-        var consumerSettings = kafkaSettings.GetConsumerSettings(KafkaConstants.ConsumerNames.ShipOrderTasks);
+        var consumerSettings = kafkaSettings.GetConsumerSettings(KafkaConsumerNames.ShipOrderTasks);
+        var producerSettings = kafkaSettings.GetProducerSettings(KafkaProducerNames.ShipOrderResult);
 
         services.AddKafka(
             kafka => kafka
@@ -21,7 +23,7 @@ public static class KafkaConfiguration
                         .WithBrokers(kafkaSettings.Brokers)
                         .AddConsumer(
                             consumer => consumer
-                                .WithConsumerConfig(consumerSettings.ConsumerConfig)
+                                .WithConsumerConfig(consumerSettings.Configuration)
                                 .Topic(consumerSettings.Topic)
                                 .WithWorkersCount(consumerSettings.WorkersCount)
                                 .WithBufferSize(consumerSettings.BufferSize)
@@ -35,8 +37,9 @@ public static class KafkaConfiguration
                             producer =>
                             {
                                 producer
-                                    .DefaultTopic("ship-order-tasks")
-                                    .WithAcks(Acks.All)
+                                    .WithProducerConfig(producerSettings.Configuration)
+                                    .DefaultTopic(producerSettings.Topic)
+                                    // .WithAcks(Acks.All)
                                     .AddMiddlewares(middlewares => middlewares.AddSerializer<JsonCoreSerializer>());
                             })
                 )

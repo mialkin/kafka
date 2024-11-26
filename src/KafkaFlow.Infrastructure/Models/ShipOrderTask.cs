@@ -1,6 +1,3 @@
 namespace KafkaFlow.Infrastructure.Models;
 
-public class ShipOrderTask
-{
-    public required string OrderNumber { get; set; }
-}
+public record ShipOrderTask(string OrderNumber);

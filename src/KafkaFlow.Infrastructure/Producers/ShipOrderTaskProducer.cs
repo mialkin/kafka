@@ -4,14 +4,14 @@ using Microsoft.Extensions.Logging;
 namespace KafkaFlow.Infrastructure.Producers;
 
 public class ShipOrderTaskProducer(
-    IMessageProducer<ShipOrderTask> messageProducer,
+    IMessageProducer<ShipOrderTaskResult> messageProducer,
     ILogger<ShipOrderTaskProducer> logger) :
     IShipOrderTaskProducer
 {
-    public async Task ProduceAsync(ShipOrderTask shipOrderTask)
+    public async Task ProduceAsync(ShipOrderTaskResult shipOrderTaskResult)
     {
-        logger.LogInformation("Producing message to Kafka. Message: {@Message}", shipOrderTask);
-        await messageProducer.ProduceAsync(messageKey: null, messageValue: shipOrderTask);
-        logger.LogInformation("Successfully produced message to Kafka. Message: {@Message}", shipOrderTask);
+        logger.LogInformation("Producing message to Kafka. Message: {@Message}", shipOrderTaskResult);
+        await messageProducer.ProduceAsync(messageKey: null, messageValue: shipOrderTaskResult);
+        logger.LogInformation("Successfully produced message to Kafka. Message: {@Message}", shipOrderTaskResult);
     }
 }
