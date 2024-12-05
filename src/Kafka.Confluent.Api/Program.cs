@@ -1,4 +1,6 @@
+using Bogus;
 using Kafka.Confluent.Api.Configuration;
+using Kafka.Confluent.Api.Producers;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,6 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.WriteTo.Console();
 });
 
-services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
 
@@ -30,6 +31,12 @@ application.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
-application.MapControllers();
+application.MapGet("produce-random-message", async (SimpleProducer simpleProducer) =>
+{
+    Faker faker = new("ru");
+    await simpleProducer.ProduceAsync(faker.Random.Word());
+
+    return Results.Ok();
+});
 
 application.Run();

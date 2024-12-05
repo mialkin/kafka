@@ -17,19 +17,12 @@ public class SimpleProducer(ILogger<SimpleProducer> logger)
         // available. Note: by default strings are encoded as UTF8.
         using var producer = new ProducerBuilder<Null, string>(_producerConfig).Build();
 
-        try
-        {
-            var deliveryResult = await producer.ProduceAsync(
-                topic: "simple-producer-topic",
-                message: new Message<Null, string> { Value = message });
+        var deliveryResult = await producer.ProduceAsync(
+            topic: "simple-producer-topic",
+            message: new Message<Null, string> { Value = message });
 
-            logger.LogInformation(
-                "Delivered {Value} to topic partition offset {TopicPartitionOffset}",
-                deliveryResult.Value, deliveryResult.TopicPartitionOffset);
-        }
-        catch (ProduceException<Null, string> exception)
-        {
-            logger.LogError(exception, "Unexpected exception occured");
-        }
+        logger.LogInformation(
+            "Delivered {Value} to topic partition offset {TopicPartitionOffset}",
+            deliveryResult.Value, deliveryResult.TopicPartitionOffset);
     }
 }
