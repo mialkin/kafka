@@ -2,11 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AF108ADD-DD1D-4D62-BB9D-54B5EBBACB42}"
 	ProjectSection(SolutionItems) = preProject
-		.env.example = .env.example
-		Makefile = Makefile
-		compose.infrastructure.yaml = compose.infrastructure.yaml
 		.gitignore = .gitignore
-		compose.tools.yaml = compose.tools.yaml
 		readme.md = readme.md
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection

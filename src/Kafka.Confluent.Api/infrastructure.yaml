@@ -5,15 +5,15 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      # Kafka is available on port KAFKA_PORT inside the Docker network and on port KAFKA_SSL_PORT on localhost
-      KAFKA_ADVERTISED_LISTENERS: "CLIENT://kafka:${KAFKA_PORT},EXTERNAL://localhost:${KAFKA_SSL_PORT}"
+      # Kafka is available on port 7020 inside the Docker network and on port 7030 on localhost
+      KAFKA_ADVERTISED_LISTENERS: "CLIENT://kafka:7020,EXTERNAL://localhost:7030"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: CLIENT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     ports:
-      - "${KAFKA_PORT}:${KAFKA_PORT}"
-      - "${KAFKA_SSL_PORT}:${KAFKA_SSL_PORT}"
+      - "7020:7020"
+      - "7030:7030"
     depends_on:
       - zookeeper
 
@@ -22,3 +22,14 @@ services:
     container_name: kafka-zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
+  
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.7.2
+    container_name: kafka-kafka-ui
+    ports:
+      - "7040:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka:7020"
+    depends_on:
+      - kafka
