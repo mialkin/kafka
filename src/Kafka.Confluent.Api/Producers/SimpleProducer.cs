@@ -6,7 +6,7 @@ public class SimpleProducer(ILogger<SimpleProducer> logger)
 {
     private readonly ProducerConfig _producerConfig = new()
     {
-        BootstrapServers = "localhost:7030",
+        BootstrapServers = "localhost:9092",
         BrokerAddressFamily = BrokerAddressFamily.V4
     };
 
