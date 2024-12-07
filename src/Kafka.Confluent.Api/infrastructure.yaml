@@ -1,8 +1,8 @@
 services:
-  broker:
+  kafka:
     image: apache/kafka:latest
     hostname: broker
-    container_name: broker
+    container_name: kafka
     ports:
       - 9092:9092
     environment:
@@ -32,4 +32,4 @@ services:
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: broker:29092
       DYNAMIC_CONFIG_ENABLED: true
     depends_on:
-      - broker
+      - kafka
