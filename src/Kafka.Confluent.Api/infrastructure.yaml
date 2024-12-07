@@ -21,15 +21,15 @@ services:
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
-      
+  
   kafbat-ui:
     container_name: kafbat-ui
     image: ghcr.io/kafbat/kafka-ui:latest
     ports:
       - 7040:8080
     environment:
-      DYNAMIC_CONFIG_ENABLED: 'true'
-    volumes:
-      - ./kafbat-ui-config.yaml:/etc/kafkaui/dynamic_config.yaml
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: broker:29092
+      DYNAMIC_CONFIG_ENABLED: true
     depends_on:
       - broker
