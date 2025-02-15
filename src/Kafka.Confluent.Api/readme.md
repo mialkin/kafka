@@ -27,3 +27,8 @@ Shutdown infrastructure:
 docker compose --file=infrastructure.yaml down
 ```
 
+## Links
+
+[↑ Kafbat UI](http://localhost:7040/ui/clusters/local/all-topics).
+
+[↑ Swagger UI](http://localhost:7010/).
