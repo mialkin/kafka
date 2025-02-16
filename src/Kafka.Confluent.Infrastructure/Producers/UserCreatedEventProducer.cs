@@ -1,24 +1,28 @@
 using System.Text.Json;
 using Confluent.Kafka;
 using Kafka.Confluent.Infrastructure.Constants;
+using Kafka.Confluent.Infrastructure.Settings;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Kafka.Confluent.Infrastructure.Producers;
 
-public class UserCreatedEventProducer(ILogger<UserCreatedEventProducer> logger)
+public class UserCreatedEventProducer(IOptions<KafkaProducerSettings> options, ILogger<UserCreatedEventProducer> logger)
 {
-    private readonly ProducerConfig _producerConfig = new()
-    {
-        BootstrapServers = "localhost:9092",
-        BrokerAddressFamily = BrokerAddressFamily.V4
-    };
+    private readonly KafkaProducerSettings _producerSettings = options.Value;
 
     public async Task ProduceAsync(UserCreatedEvent @event, CancellationToken cancellationToken)
     {
+        var producerConfig = new ProducerConfig
+        {
+            BootstrapServers = _producerSettings.BootstrapServers,
+            BrokerAddressFamily = BrokerAddressFamily.V4
+        };
+
         // If serializers are not specified, default serializers from
         // `Confluent.Kafka.Serializers` will be automatically used where
         // available. Note: by default strings are encoded as UTF8.
-        using var producer = new ProducerBuilder<string, string>(_producerConfig).Build();
+        using var producer = new ProducerBuilder<string, string>(producerConfig).Build();
 
         var value = JsonSerializer.Serialize(@event);
 

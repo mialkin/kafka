@@ -1,5 +1,5 @@
+using Kafka.Confluent.Api.Configurations;
 using Kafka.Confluent.Api.Endpoints.CreateUser;
-using Kafka.Confluent.Infrastructure.Configurations;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +17,7 @@ services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); 
 
 services.AddRouting(options => options.LowercaseUrls = true);
 
-services.ConfigureKafka();
+services.ConfigureKafka(builder.Configuration);
 
 var application = builder.Build();
 
