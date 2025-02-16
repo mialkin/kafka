@@ -1,6 +1,6 @@
 using Bogus;
-using Kafka.Confluent.Api.Configuration;
-using Kafka.Confluent.Api.Producers;
+using Kafka.Confluent.Infrastructure.Configurations;
+using Kafka.Confluent.Infrastructure.Producers;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +18,7 @@ services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); 
 
 services.AddRouting(options => options.LowercaseUrls = true);
 
-services.ConfigureKafkaProducers();
+services.ConfigureKafka();
 
 var application = builder.Build();
 

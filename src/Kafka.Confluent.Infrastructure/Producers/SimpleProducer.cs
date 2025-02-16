@@ -1,6 +1,7 @@
 using Confluent.Kafka;
+using Microsoft.Extensions.Logging;
 
-namespace Kafka.Confluent.Api.Producers;
+namespace Kafka.Confluent.Infrastructure.Producers;
 
 public class SimpleProducer(ILogger<SimpleProducer> logger)
 {
