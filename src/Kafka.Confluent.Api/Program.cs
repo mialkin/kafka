@@ -1,7 +1,5 @@
-using Bogus;
 using Kafka.Confluent.Api.Endpoints.CreateUser;
 using Kafka.Confluent.Infrastructure.Configurations;
-using Kafka.Confluent.Infrastructure.Producers;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

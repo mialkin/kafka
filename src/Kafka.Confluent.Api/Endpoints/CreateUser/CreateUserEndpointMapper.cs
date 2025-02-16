@@ -13,11 +13,13 @@ public static class CreateUserEndpointMapper
                 pattern: EndpointNames.CreateUser,
                 handler: async (
                     [FromBody] CreateUserRequest request,
-                    [FromServices] SimpleProducer simpleProducer) =>
+                    [FromServices] UserCreatedEventProducer eventProducer,
+                    CancellationToken cancellationToken) =>
                 {
-                    await simpleProducer.ProduceAsync("ABC");
-
                     var userId = Guid.NewGuid();
+                    var @event = new UserCreatedEvent(userId, request.Name, request.DepartmentId, request.IsActive);
+
+                    await eventProducer.ProduceAsync(@event, cancellationToken);
 
                     return new CreateUserResponse(userId);
                 })

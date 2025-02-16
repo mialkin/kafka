@@ -7,6 +7,6 @@ public static class KafkaConfiguration
 {
     public static void ConfigureKafka(this IServiceCollection services)
     {
-        services.AddSingleton<SimpleProducer>();
+        services.AddSingleton<UserCreatedEventProducer>();
     }
 }
