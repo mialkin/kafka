@@ -22,8 +22,6 @@ services.ConfigureKafka();
 
 var application = builder.Build();
 
-application.UseSerilogRequestLogging();
-
 application.UseSwagger();
 application.UseSwaggerUI(options =>
 {
