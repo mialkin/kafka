@@ -1,4 +1,5 @@
 using Bogus;
+using Kafka.Confluent.Api.Endpoints.CreateUser;
 using Kafka.Confluent.Infrastructure.Configurations;
 using Kafka.Confluent.Infrastructure.Producers;
 using Serilog;
@@ -29,12 +30,6 @@ application.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
-application.MapGet("produce-random-message", async (SimpleProducer simpleProducer) =>
-{
-    Faker faker = new("ru");
-    await simpleProducer.ProduceAsync(faker.Random.Word());
-
-    return Results.Ok();
-});
+application.MapCreateUserEndpoint();
 
 application.Run();
