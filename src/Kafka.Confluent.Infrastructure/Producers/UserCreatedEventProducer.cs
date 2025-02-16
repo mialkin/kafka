@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Confluent.Kafka;
+using Kafka.Confluent.Infrastructure.Constants;
 using Microsoft.Extensions.Logging;
 
 namespace Kafka.Confluent.Infrastructure.Producers;
@@ -22,12 +23,12 @@ public class UserCreatedEventProducer(ILogger<UserCreatedEventProducer> logger)
         var value = JsonSerializer.Serialize(@event);
 
         var deliveryResult = await producer.ProduceAsync(
-            topic: "simple-producer-topic",
+            topic: TopicNames.UserCreated,
             message: new Message<string, string>
             {
                 Key = @event.Id.ToString(),
                 Value = value,
-                Headers = [new Header("Message-Type", "UserCreated"u8.ToArray())]
+                Headers = [new Header(HeaderNames.MessageType, "UserCreated"u8.ToArray())]
             },
             cancellationToken: cancellationToken);
 
