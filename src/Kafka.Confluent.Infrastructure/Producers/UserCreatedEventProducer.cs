@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
 
@@ -16,11 +17,18 @@ public class UserCreatedEventProducer(ILogger<UserCreatedEventProducer> logger)
         // If serializers are not specified, default serializers from
         // `Confluent.Kafka.Serializers` will be automatically used where
         // available. Note: by default strings are encoded as UTF8.
-        using var producer = new ProducerBuilder<Null, UserCreatedEvent>(_producerConfig).Build();
+        using var producer = new ProducerBuilder<string, string>(_producerConfig).Build();
+
+        var value = JsonSerializer.Serialize(@event);
 
         var deliveryResult = await producer.ProduceAsync(
             topic: "simple-producer-topic",
-            message: new Message<Null, UserCreatedEvent> { Value = @event },
+            message: new Message<string, string>
+            {
+                Key = @event.Id.ToString(),
+                Value = value,
+                Headers = [new Header("Message-Type", "UserCreated"u8.ToArray())]
+            },
             cancellationToken: cancellationToken);
 
         logger.LogInformation(
